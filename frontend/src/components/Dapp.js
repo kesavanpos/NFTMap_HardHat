@@ -8,6 +8,12 @@ import { ethers } from "ethers";
 import TokenArtifact from "../contracts/Token.json";
 import contractAddress from "../contracts/contract-address.json";
 
+
+// We import the contract's artifacts and address here, as we are going to be
+// using them with ethers
+import MapCoreArtifact from "../contracts/MapCore.json";
+import MapCoreAddress from "../contracts/mapcore-address.json";
+
 // All the logic of this dapp is contained in the Dapp component.
 // These other components are just presentational ones: they don't have any
 // logic. They just render HTML.
@@ -234,6 +240,19 @@ export class Dapp extends React.Component {
       TokenArtifact.abi,
       this._provider.getSigner(0)
     );
+
+    // Then, we initialize the contract using that provider and the token's
+    // artifact. You can do this same thing with your contracts.
+    this._mapCoreToken = new ethers.Contract(
+      MapCoreAddress.Token,
+      MapCoreArtifact.abi,
+      this._provider.getSigner(0)
+    );
+
+    let mapTokenId = await this._mapCoreToken.createMap("1");
+
+    console.log(this._mapCoreToken);
+    console.log(mapTokenId);
   }
 
   // The next two methods are needed to start and stop polling data. While

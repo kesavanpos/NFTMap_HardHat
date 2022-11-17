@@ -23,14 +23,45 @@ async function main() {
   console.log("Account balance:", (await deployer.getBalance()).toString());
 
   const Token = await ethers.getContractFactory("Token");
+
+  const MapCore = await ethers.getContractFactory("MapCore");
+
   const token = await Token.deploy();
+  const mapCore = await MapCore.deploy();
   await token.deployed();
+  await mapCore.deployed();
 
   console.log("Token address:", token.address);
+  console.log("MapCore address:", mapCore.address);
+
 
   // We also save the contract's artifacts and address in the frontend directory
   saveFrontendFiles(token);
+
+  saveFrontendFiles_Map(mapCore);
 }
+
+function saveFrontendFiles_Map(mapCore) {
+  const fs = require("fs");
+  const contractsDir = path.join(__dirname, "..", "frontend", "src", "contracts");
+
+  if (!fs.existsSync(contractsDir)) {
+    fs.mkdirSync(contractsDir);
+  }
+
+  fs.writeFileSync(
+    path.join(contractsDir, "mapcore-address.json"),
+    JSON.stringify({ Token: mapCore.address }, undefined, 2)
+  );
+
+  const TokenArtifact = artifacts.readArtifactSync("MapCore");
+
+  fs.writeFileSync(
+    path.join(contractsDir, "MapCore.json"),
+    JSON.stringify(TokenArtifact, null, 2)
+  );
+}
+
 
 function saveFrontendFiles(token) {
   const fs = require("fs");
