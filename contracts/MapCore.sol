@@ -13,7 +13,7 @@ constructor() {
     _createMap('',address(0));
   }
 
-  function createMap(string memory _map) public onlyOwner {
+  function createMap(string memory _map) public {
 
     // Gen0 have no owners they are own by the contract
     uint256 tokenId = _createMap(_map,msg.sender);

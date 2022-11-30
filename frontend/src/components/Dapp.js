@@ -230,6 +230,7 @@ export class Dapp extends React.Component {
   }
 
   async _initializeEthers() {
+    debugger;
     // We first initialize ethers by creating a provider using window.ethereum
     this._provider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -249,7 +250,12 @@ export class Dapp extends React.Component {
       this._provider.getSigner(0)
     );
 
+    console.log(contractAddress.Token);
+    console.log(MapCoreAddress.Token);
+
     let mapTokenId = await this._mapCoreToken.createMap("1");
+
+    let getTokenId = await this._mapCoreToken.getMap(1);
 
     console.log(this._mapCoreToken);
     console.log(mapTokenId);

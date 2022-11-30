@@ -43,7 +43,7 @@ async function main() {
 
 function saveFrontendFiles_Map(mapCore) {
   const fs = require("fs");
-  const contractsDir = path.join(__dirname, "..", "frontend", "src", "contracts");
+  const contractsDir = path.join(__dirname, "..", "frontend_updated", "src", "contracts");
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
@@ -65,7 +65,7 @@ function saveFrontendFiles_Map(mapCore) {
 
 function saveFrontendFiles(token) {
   const fs = require("fs");
-  const contractsDir = path.join(__dirname, "..", "frontend", "src", "contracts");
+  const contractsDir = path.join(__dirname, "..", "frontend_updated", "src", "contracts");
 
   if (!fs.existsSync(contractsDir)) {
     fs.mkdirSync(contractsDir);
