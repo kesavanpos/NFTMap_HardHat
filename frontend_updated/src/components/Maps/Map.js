@@ -1,5 +1,5 @@
 import React from "react";
-import WorldMap from "react-svg-worldmap";
+//import WorldMap from "react-svg-worldmap";
 
 function Maps({countryClick}) {
   const data = [
@@ -17,14 +17,14 @@ function Maps({countryClick}) {
 
   return (
     <div className="App">
-      <WorldMap
+      {/* <WorldMap
         color="red"
         title="Top 10 Populous Countries"
         value-suffix="people"
         size="xl"
         onClickFunction={countryClick}
         data={data}
-      />
+      /> */}
     </div>
   );
 }

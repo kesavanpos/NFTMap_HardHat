@@ -65,16 +65,16 @@ import {
  
   const saveSvgAsPng = require('save-svg-as-png');
 
-  import contract from '../../contracts/MapCore.json';
-  import marketplaceContract from "../../contracts/MapMarketPlace.json";
+  // import contract from '../../contracts/MapCore.json';
+  // import marketplaceContract from "../../contracts/MapMarketPlace.json";
 
-  // bsc contract address
-  let contractAddress = '0x8c0E2c84cb2e402d3D84599841cCF50DE14945EE';
+  // // bsc contract address
+  // let contractAddress = '0x8c0E2c84cb2e402d3D84599841cCF50DE14945EE';
 
   //let contractAddress = '0x7606c6A9Cd51c333Be0e71fF466A357D72A30159';
-  let marketContractAddress = contractAddress;
-  const abi = contract.abi;
-  const marketplaceabi = marketplaceContract.abi;
+  // let marketContractAddress = contractAddress;
+  // const abi = contract.abi;
+  // const marketplaceabi = marketplaceContract.abi;
 
   let selectedMap = [];
   const imageOptions = {
@@ -92,96 +92,22 @@ import {
   });
  
 const NFTMap = () =>{
-    const iconTeal = useColorModeValue("teal.300", "teal.300");
+  debugger;
+  const iconTeal = useColorModeValue("teal.300", "teal.300");
   const iconBoxInside = useColorModeValue("white", "white");
   const textColor = useColorModeValue("gray.700", "white");
   const [account, setAccount] = useState(); // state variable to set account.  
-  const web3 = new Web3(Web3.givenProvider);
-  var instance:any;
-  var marketInstance;
-
-  var firstAddress;
-  useEffect(() => {
-    checkWalletIsConnected();
+  
+  useEffect(() => {   
+    debugger; 
   }, [])
 
-  const checkWalletIsConnected = () => {
+  const onMapClicked = () =>{
     
-    const { ethereum } = window;
-
-    if(!ethereum){
-      console.log("");
-      return;      
-    }
-    else{
-    window.ethereum.enable().then(function(accounts){      
-      firstAddress = accounts[0];
-      instance = new web3.eth.Contract(abi,contractAddress,{from:accounts[0],gas:100000});
-      contractAddress = instance._address;
-      console.log(instance._address);
-      marketInstance = new web3.eth.Contract(marketplaceabi,marketContractAddress,{from:accounts[0],gas:100000});
-
-      instance.events.MapCreated()
-      .on('data', function(event){
-          console.log(event); // same results as the optional callback above
-      })
-
-      marketInstance.events.MarketTransaction()
-      .on('data', function(event){
-          console.log(event); // same results as the optional callback above
-      })
-          
-      web3.eth.getBalance(contractAddress).then((data) => {        
-        console.log("contract balance" + data);
-      }); 
-      web3.eth.getBalance(firstAddress).then(console.log); 
-      });
-    }
-   }
-
-   const getMapID = () =>{
-    
-   }
-
-   const mintNFT = async (e) =>{
-      const mapIds = selectedMap.join(",");      
-      try {
-        instance.methods.createMap(mapIds).send({ from: firstAddress}).then((res) =>{
-          window.location.href="#/admin/dashboard/marketplace";
-        });
-
-        // try{
-        //   debugger;
-        //   let tokenSale = await instance.methods.getAllTokenOnSale().call();
-        // }
-        // catch(e){
-        //   console.log(e);
-        // }
-        
-
-
-      } catch (err) {        
-        console.log(err);
-      }
-   }
-
-  const onMapClicked = (e) =>{    
   }
 
-  const selectSVG = (e) =>{
-  }
-  
-  const downloadPng=() => {
-    saveSvgAsPng.saveSvgAsPng(document.getElementById('svg-chart'), 'usamap.png', imageOptions);    
- };
- 
-  
-
-    return(
-        <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }} mt={'10px'}>
-          <div>
-            Your account is: {account}
-          </div>
+    return(      
+        <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }} mt={'10px'}>          
         <Text
           color={textColor}
           fontWeight="bold"

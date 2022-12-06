@@ -108,7 +108,7 @@ export default function Default() {
                     _hover='teal.300'
                     color='white'
                     fontSize='md'
-                    onClick={() => { window.location.href="#/admin/dashboard/HomeMap"}}         
+                    onClick={() => { window.location.href="#/admin/dashboard/NFTMap"}}         
                     >
                    Click here
                   </Button>
