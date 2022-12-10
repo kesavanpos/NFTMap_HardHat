@@ -1,6 +1,14 @@
 import { default as Logo } from '../../assets/img/cut-us.svg';
 import { ReactSVG } from 'react-svg'
 
+import HelloWorld from "../../contracts/HelloWorld.json";
+import HelloWorldToken from "../../contracts/helloWorld-address.json";
+
+import MapCore from "../../contracts/MapCore.json";
+import MapCoreToken from "../../contracts/mapcore-address.json";
+
+import { ethers } from "ethers";
+
 // Chakra imports
 import {
     Box,
@@ -98,12 +106,58 @@ const NFTMap = () =>{
   const textColor = useColorModeValue("gray.700", "white");
   const [account, setAccount] = useState(); // state variable to set account.  
   
+  const connectWallet = async () => {
+    try {
+      const { ethereum } = window;
+
+      if (!ethereum) {
+        alert("Please install MetaMask!");
+        return;
+      }
+
+      const accounts = await ethereum.request({
+        method: "eth_requestAccounts",
+      });
+
+      fetchHelloworld();
+
+      console.log("Connected", accounts[0]);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fetchHelloworld = async () => {
+    debugger;
+    let contractAddress = HelloWorldToken.Token;
+    const { ethereum } = window;
+
+    if (!ethereum) {
+      alert("Please install MetaMask!");
+      return;
+    }
+
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const contract = new ethers.Contract(
+      contractAddress,
+      HelloWorld.abi,
+      provider
+    );
+
+    const helloworld = await contract.message("work");
+    const updateHelloWorld = await contract.update("work");
+    const helloworld1 = await contract.message("work");
+    console.log(helloworld1);
+  };
+
+
   useEffect(() => {   
-    debugger; 
+    connectWallet();
   }, [])
 
   const onMapClicked = () =>{
-    
+
   }
 
     return(      

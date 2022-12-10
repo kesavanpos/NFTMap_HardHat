@@ -6,7 +6,7 @@ require("@nomicfoundation/hardhat-toolbox");
 require("./tasks/faucet");
 
 const API_URL='https://eth-goerli.g.alchemy.com/v2/foiRhE1OcCTdH4QMaUAI-tq9N4ImoErQ'
-const PRIVATE_KEY='9e4782b5efdc36e4edd96206b1c8698a5ea8d832892b3a11a34b13ec072e723c'
+const PRIVATE_KEY='066fe1f8befc4d7cc698222f04e52852d5f7dbbab5042f1f066eaefc0a0e7429'
 
 
 /** @type import('hardhat/config').HardhatUserConfig */
